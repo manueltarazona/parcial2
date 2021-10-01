@@ -1,0 +1,4 @@
+
+echo "instalar vim y net-tools"
+sudo yum install vim -y
+sudo yum install net-tools -y

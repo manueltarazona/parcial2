@@ -1,0 +1,36 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+config.vm.define :servidor3 do |servidor3|
+servidor3.vm.box = "bento/centos-7.9"
+servidor3.vm.network :private_network, ip: "192.168.100.4"
+servidor3.vm.provision "shell", path: "server3.sh"
+servidor3.vm.hostname = "servidor3"
+servidor3.vm.provider "virtualbox" do |v|
+v.cpus = 2
+v.memory = 512
+end
+end
+config.vm.define :firewall do |firewall|
+firewall.vm.box = "bento/centos-7.9"
+firewall.vm.network :public_network, ip: "192.168.0.115"
+firewall.vm.network :private_network, ip: "192.168.100.3"
+firewall.vm.provision "shell", path: "fire.sh"
+firewall.vm.hostname = "firewall"
+firewall.vm.provider "virtualbox" do |v|
+v.cpus = 2
+v.memory = 512
+end
+end
+config.vm.define :servidor2 do |servidor2|
+servidor2.vm.box = "bento/centos-7.9"
+servidor2.vm.network :private_network, ip: "192.168.100.2"
+servidor2.vm.provision "shell", path: "server2.sh"
+servidor2.vm.hostname = "servidor2"
+servidor2.vm.provider "virtualbox" do |v|
+v.cpus = 2
+v.memory = 512
+end
+end
+end
